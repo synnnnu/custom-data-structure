@@ -33,3 +33,13 @@
 | isEmpty | `bool isEmpty()`            | 비어있는지 여부                                             |
 | isFull  | `bool isFull()`             | 가득 찼는지 여부 (`count == N`)                             |
 | size    | `int size()`                | 현재 저장된 원소 개수                                       |
+
+<br>
+
+### 사용 예시
+
+```cpp
+Stack<int> s1;           // 타입 int, 크기는 기본값 100
+Stack<int, 5> s2;        // 타입 int, 크기 5
+Stack<std::string, 20> s3;  // 타입 string, 크기 20
+```
