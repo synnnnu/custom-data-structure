@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "basicDataStructure/Stack.h"
+#include "basicDataStructure/queue.h"
 
 using namespace std;
 
@@ -23,6 +24,26 @@ void testStack() {
     cout << "string stack isFull: " << strStack.isFull() << endl;
 }
 
+void testQueue() {
+    Queue<int, 5> q;
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    cout << "5개 채움, isFull: " << q.isFull() << endl;
+
+    q.dequeue();
+    q.dequeue();
+    cout << "2개 뺐음, count: " << q.size() << endl;
+    cout << "isFull: " << q.isFull() << endl;
+
+    bool ok = q.enqueue(6);
+    cout << "enqueue(6) 결과: " << ok << endl;
+}
+
 int main() {
-    testStack();
+    // testStack();
+    testQueue();
 }
