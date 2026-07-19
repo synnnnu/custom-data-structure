@@ -10,6 +10,7 @@
 
 - [x] Stack
 - [x] Queue
+- [x] Circular Queue
 
 <br>
 
@@ -79,4 +80,40 @@ Stack과 동일하게 힙 할당 없이 정적 배열(`T arr[N]`)만 사용
 Queue<int> q1;              // 타입 int, 크기는 기본값 100
 Queue<int, 5> q2;            // 타입 int, 크기 5
 Queue<std::string, 20> q3;   // 타입 string, 크기 20
+```
+
+<br>
+
+## Circular Queue
+
+### 개요
+
+`template <typename T, int N = 100>` 기반의 FIFO 큐.
+
+인터페이스는 Queue와 동일하지만, 내부적으로 `frontIdx`/`rearIdx`를 `% N` 연산으로 순환시켜 앞쪽 빈 공간을 재활용
+
+Queue는 `dequeue`마다 남은 원소를 전부 앞으로 당겨야 해서 O(n)인 반면, Circular Queue는 인덱스 계산만으로 처리되어 `dequeue`가 O(1)
+
+<br>
+
+### 인터페이스
+
+| 함수      | 시그니처                       | 설명                                                                       |
+| --------- | ------------------------------ | -------------------------------------------------------------------------- |
+| 생성자    | `CircularQueue()`              | 인자 없음, 크기는 템플릿 파라미터 `N`으로 결정                             |
+| enqueue   | `bool enqueue(const T& value)` | `rearIdx` 위치에 저장 후 `(rearIdx + 1) % N`으로 이동, 가득 찼으면 `false` |
+| dequeue   | `bool dequeue()`               | `frontIdx`를 `(frontIdx + 1) % N`으로 이동, 비어있으면 `false`             |
+| peekFront | `bool peekFront(T& outValue)`  | 성공 시 `outValue`에 `arr[frontIdx]` 값을 채우고 `true`                    |
+| isEmpty   | `bool isEmpty()`               | 비어있는지 여부                                                            |
+| isFull    | `bool isFull()`                | 가득 찼는지 여부 (`count == N`, `rearIdx == N`이 아님에 주의)              |
+| size      | `int size()`                   | 현재 저장된 원소 개수                                                      |
+
+<br>
+
+### 사용 예시
+
+```cpp
+CircularQueue<int> cq1;              // 타입 int, 크기는 기본값 100
+CircularQueue<int, 5> cq2;            // 타입 int, 크기 5
+CircularQueue<std::string, 20> cq3;   // 타입 string, 크기 20
 ```
