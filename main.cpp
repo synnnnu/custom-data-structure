@@ -3,6 +3,7 @@
 #include "basicDataStructure/Stack.h"
 #include "basicDataStructure/Queue.h"
 #include "basicDataStructure/CircularQueue.h"
+#include "basicDataStructure/Deque.h"
 
 using namespace std;
 
@@ -58,17 +59,35 @@ void testCircularQueue() {
     q.dequeue();
     cout << "2개 뺐음, count: " << q.size() << endl;      // 3
 
-    bool ok1 = q.enqueue(6);   // rearIdx가 (5) % 5 = 0 이라 arr[0] 재활용!
+    bool ok1 = q.enqueue(6);
     bool ok2 = q.enqueue(7);
     cout << "enqueue(6): " << ok1 << ", enqueue(7): " << ok2 << endl;  // 둘 다 true
 
     int val;
     q.peekFront(val);
-    cout << "현재 front 값: " << val << endl;  // 3 (1, 2를 이미 뺐으니까)
+    cout << "현재 front 값: " << val << endl;  // 3
+}
+
+void testDeque() {
+    Deque<int, 5> dq;
+
+    dq.pushBack(1);    // [1]
+    dq.pushBack(2);    // [1, 2]
+    dq.pushFront(0);   // [0, 1, 2]
+
+    int val;
+    dq.peekFront(val); cout << "front: " << val << endl;  // 0
+    dq.peekBack(val);  cout << "back: " << val << endl;   // 2
+
+    dq.popFront();      // [1, 2]
+    dq.popBack();       // [1]
+    dq.peekFront(val); cout << "front: " << val << endl;  // 1
+    cout << "size: " << dq.size() << endl;                // 1
 }
 
 int main() {
     // testStack();
     // testQueue();
-    testCircularQueue();
+    // testCircularQueue();
+    testDeque();
 }
